@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
 
 // Create our car context using React.CreateContext()
 export const CarContext = React.createContext();
@@ -26,7 +28,7 @@ export default function CarProvider(props) {
       isRunning: false,
     },
   ];
-
   // The provider component will wrap all other components inside of it that need access to our global state
-  return <CarContext.Provider value={{ cars }} {...props} />;
+  // return <CarContext.Provider value={{ cars }} {...props} />;
+  return <Provider value={{ cars }} store={store} {...props} />
 }

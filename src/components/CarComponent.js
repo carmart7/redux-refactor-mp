@@ -1,15 +1,22 @@
 import React, { useReducer, useState } from 'react';
-import { useCar } from '../utils/CarContext';
-import reducer from '../utils/reducers';
+// import { useCar } from '../utils/CarContext';
+// import reducer from '../utils/reducers';
 import { START_CAR, STOP_CAR, ADD_CAR } from '../utils/actions';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+
 export default function CarComponent() {
-  const initialState = useCar();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // const initialState = useCar();
+  // const [state, dispatch] = useReducer(reducer, initialState);
+  const dispatch = useDispatch();
+  const cars = useSelector((state) => state.cars)
 
   const [newCarMake, setNewCarMake] = useState('');
   const [newCarModel, setNewCarModel] = useState('');
   const [newCarYear, setNewCarYear] = useState('');
+
+  console.log("cars", cars);
 
   return (
     <>
@@ -54,7 +61,7 @@ export default function CarComponent() {
         </div>
       </section>
       <section className="car-list">
-        {state.cars.map((car) => (
+        {cars.map((car) => (
           <div key={car.id} id={car.id} className="card mb-3">
             <h4 className="card-header bg-primary text-light p-2 m-0">
               {car.model} <br />
